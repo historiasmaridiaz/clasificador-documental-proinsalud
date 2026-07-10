@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guía para publicar el Clasificador Documental</title>
+  <style>
+    :root { color-scheme: light; --green:#0f766e; --ink:#17202a; --soft:#eef7f5; --line:#c9ddda; }
+    body { margin:0; font-family:Arial, sans-serif; color:var(--ink); background:#f7fafc; line-height:1.55; }
+    main { max-width:900px; margin:36px auto; padding:28px; background:white; border:1px solid var(--line); border-radius:16px; }
+    h1,h2 { color:var(--green); } h1 { margin-top:0; }
+    .notice { padding:16px; background:#fff7dd; border-left:5px solid #d99a00; border-radius:8px; }
+    .step { margin:18px 0; padding:18px; background:var(--soft); border-radius:10px; }
+    code,pre { background:#17202a; color:white; border-radius:6px; } code { padding:2px 6px; }
+    pre { padding:14px; overflow:auto; }
+    a { color:var(--green); font-weight:bold; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Publicar el Clasificador Documental</h1>
+  <p>Esta guía se puede abrir con doble clic en Windows.</p>
+  <div class="notice">
+    <strong>No suba solamente este HTML.</strong> El clasificador necesita Python para OCR, TRD/CCD, SQLite, PDF, Excel y ZIP. Debe cargar todos los archivos y carpetas del proyecto.
+  </div>
+  <div class="step">
+    <h2>1. Crear repositorio</h2>
+    <p>Abra <a href="https://github.com/new">github.com/new</a>, cree un repositorio privado y use un nombre como <code>clasificador-documental-proinsalud</code>.</p>
+  </div>
+  <div class="step">
+    <h2>2. Cargar el proyecto</h2>
+    <p>Descomprima el ZIP, entre en <code>clasificador_documental_proinsalud</code> y cargue todo su contenido. En la raíz de GitHub deben verse <code>app.py</code>, <code>requirements.txt</code>, <code>packages.txt</code>, la carpeta <code>core</code> y la carpeta <code>data</code>.</p>
+  </div>
+  <div class="step">
+    <h2>3. Convertirlo en web</h2>
+    <p>Abra <a href="https://share.streamlit.io/">share.streamlit.io</a>, seleccione el repositorio, la rama <code>main</code> y escriba <code>app.py</code> como archivo principal.</p>
+  </div>
+  <div class="step">
+    <h2>4. Contraseña opcional</h2>
+    <p>En Secrets agregue:</p>
+    <pre>APP_PASSWORD = "SU_CONTRASEÑA_SEGURA"</pre>
+  </div>
+  <p><strong>Privacidad:</strong> para documentos institucionales use repositorio privado y no publique historias clínicas o datos personales en una aplicación abierta.</p>
+</main>
+</body>
+</html>
