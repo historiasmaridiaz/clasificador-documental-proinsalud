@@ -10,16 +10,39 @@ from typing import Any
 
 from .text_extract import DocumentPayload, ExtractedDocument
 
+# HOTFIX_STORAGE_V3: physical uploads use a short SHA-256 filename on Windows.
+
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
-def safe_filename(value: str, fallback: str = "archivo") -> str:
-    name = Path(value.replace("\\", "/")).name
-    name = "".join(c for c in unicodedata.normalize("NFKD", name) if not unicodedata.combining(c))
-    name = re.sub(r"[^A-Za-z0-9._ -]+", "_", name).strip(" ._")
-    return name[:180] or fallback
+def safe_filename(value: str, fallback: str = "archivo", max_length: int = 96) -> str:
+    """Devuelve un nombre seguro, corto y con la extensión preservada.
+
+    Windows suele fallar con ``FileNotFoundError`` cuando la ruta completa supera
+    el límite clásico de 260 caracteres. El hash que antepone ``save_document``
+    mantiene la unicidad, por lo que podemos recortar el nombre visible sin perder
+    trazabilidad.
+    """
+    raw_name = Path(value.replace("\\", "/")).name
+    normalized = "".join(
+        c for c in unicodedata.normalize("NFKD", raw_name) if not unicodedata.combining(c)
+    )
+    normalized = re.sub(r"[^A-Za-z0-9._ -]+", "_", normalized).strip(" ._")
+    if not normalized:
+        normalized = fallback
+
+    extension = Path(normalized).suffix
+    # Las extensiones anormalmente largas no son útiles y consumen el presupuesto.
+    if len(extension) > 16:
+        extension = ""
+    stem = normalized[: -len(extension)] if extension else normalized
+    stem = stem.rstrip(" ._") or fallback
+
+    max_length = max(16, int(max_length))
+    available_stem = max(1, max_length - len(extension))
+    return f"{stem[:available_stem].rstrip(' ._') or fallback}{extension}"
 
 
 class Database:
@@ -48,7 +71,8 @@ class Database:
                     entries_json TEXT NOT NULL,
                     metadata_json TEXT NOT NULL DEFAULT '{}',
                     created_at TEXT NOT NULL,
-                    is_active INTEGER NOT NULL DEFAULT 0
+                    is_active INTEGER NOT NULL DEFAULT 0,
+                    is_archived INTEGER NOT NULL DEFAULT 0
                 );
 
                 CREATE TABLE IF NOT EXISTS documents (
@@ -77,6 +101,7 @@ class Database:
                     year_confidence REAL NOT NULL DEFAULT 0,
                     status TEXT NOT NULL DEFAULT 'Pendiente',
                     reviewer_notes TEXT NOT NULL DEFAULT '',
+                    custom_classification_json TEXT NOT NULL DEFAULT '{}',
                     created_at TEXT NOT NULL,
                     updated_at TEXT NOT NULL,
                     FOREIGN KEY(document_id) REFERENCES documents(id) ON DELETE CASCADE,
@@ -90,6 +115,8 @@ class Database:
             self._ensure_column(connection, "classifications", "document_year", "TEXT NOT NULL DEFAULT ''")
             self._ensure_column(connection, "classifications", "year_source", "TEXT NOT NULL DEFAULT ''")
             self._ensure_column(connection, "classifications", "year_confidence", "REAL NOT NULL DEFAULT 0")
+            self._ensure_column(connection, "classifications", "custom_classification_json", "TEXT NOT NULL DEFAULT '{}'")
+            self._ensure_column(connection, "catalog_versions", "is_archived", "INTEGER NOT NULL DEFAULT 0")
 
     @staticmethod
     def _ensure_column(connection: sqlite3.Connection, table: str, column: str, definition: str) -> None:
@@ -123,7 +150,7 @@ class Database:
     def list_catalogs(self) -> list[dict[str, Any]]:
         with self._connect() as connection:
             rows = connection.execute(
-                "SELECT id, name, metadata_json, created_at, is_active FROM catalog_versions ORDER BY id DESC"
+                "SELECT id, name, metadata_json, created_at, is_active FROM catalog_versions WHERE is_archived = 0 ORDER BY id DESC"
             ).fetchall()
         return [
             {
@@ -144,6 +171,25 @@ class Database:
             connection.execute("UPDATE catalog_versions SET is_active = 0")
             connection.execute("UPDATE catalog_versions SET is_active = 1 WHERE id = ?", (catalog_id,))
 
+    def delete_catalog(self, catalog_id: int) -> str:
+        """Elimina una versión sin uso o la archiva si existe trazabilidad histórica."""
+        with self._connect() as connection:
+            row = connection.execute(
+                "SELECT id, is_active FROM catalog_versions WHERE id = ? AND is_archived = 0", (catalog_id,)
+            ).fetchone()
+            if not row:
+                raise ValueError("La versión de catálogo no existe.")
+            if bool(row["is_active"]):
+                raise ValueError("No se puede eliminar el catálogo activo. Active primero otra versión.")
+            references = connection.execute(
+                "SELECT COUNT(*) FROM classifications WHERE catalog_version_id = ?", (catalog_id,)
+            ).fetchone()[0]
+            if references:
+                connection.execute("UPDATE catalog_versions SET is_archived = 1 WHERE id = ?", (catalog_id,))
+                return "archived"
+            connection.execute("DELETE FROM catalog_versions WHERE id = ?", (catalog_id,))
+            return "deleted"
+
     def active_catalog(self) -> dict[str, Any]:
         with self._connect() as connection:
             row = connection.execute(
@@ -160,10 +206,36 @@ class Database:
         }
 
     def save_document(self, payload: DocumentPayload, extracted: ExtractedDocument) -> int:
-        stored_name = f"{payload.sha256[:16]}_{safe_filename(payload.name)}"
-        stored_path = self.upload_dir / stored_name
+        """Persist a document using a fixed, very short physical filename.
+
+        The original filename is preserved in SQLite for display and reports.
+        The file on disk uses only SHA-256 plus a sanitized extension, which
+        eliminates Windows MAX_PATH failures even when the project itself was
+        extracted inside a deeply nested Downloads directory.
+        """
+        self.upload_dir.mkdir(parents=True, exist_ok=True)
+
+        extension = Path(payload.name.replace("\\", "/")).suffix.lower()
+        extension = re.sub(r"[^a-z0-9.]", "", extension)[:16]
+        if extension and not extension.startswith("."):
+            extension = f".{extension}"
+        # A 32-character hash is unique enough here and keeps the path minimal.
+        stored_path = self.upload_dir / f"{payload.sha256[:32]}{extension}"
+
         if not stored_path.exists():
-            stored_path.write_bytes(payload.data)
+            try:
+                stored_path.write_bytes(payload.data)
+            except FileNotFoundError:
+                # Recreate the destination in case it was removed while the app
+                # was running, then retry once with the same short filename.
+                self.upload_dir.mkdir(parents=True, exist_ok=True)
+                stored_path.write_bytes(payload.data)
+            except OSError as exc:
+                raise OSError(
+                    f"No fue posible guardar el documento en la ruta local corta: {stored_path}. "
+                    "Cierre la aplicación, verifique permisos de escritura y vuelva a intentarlo."
+                ) from exc
+
         with self._connect() as connection:
             row = connection.execute("SELECT id FROM documents WHERE sha256 = ?", (payload.sha256,)).fetchone()
             if row:
@@ -270,7 +342,7 @@ class Database:
                        d.metadata_json, d.warnings_json, c.catalog_version_id, c.suggested_code,
                        c.suggested_score, c.confidence, c.candidates_json, c.final_code, c.document_year,
                        c.year_source, c.year_confidence, c.status,
-                       c.reviewer_notes, c.created_at, c.updated_at
+                       c.reviewer_notes, c.custom_classification_json, c.created_at, c.updated_at
                 FROM classifications c JOIN documents d ON d.id = c.document_id
                 ORDER BY c.updated_at DESC LIMIT ?
                 """,
@@ -282,6 +354,7 @@ class Database:
             item["metadata"] = json.loads(item.pop("metadata_json"))
             item["warnings"] = json.loads(item.pop("warnings_json"))
             item["candidates"] = json.loads(item.pop("candidates_json"))
+            item["custom_classification"] = json.loads(item.pop("custom_classification_json") or "{}")
             result.append(item)
         return result
 
@@ -292,15 +365,18 @@ class Database:
         status: str,
         notes: str = "",
         document_year: str | int | None = None,
+        custom_classification: dict[str, Any] | None = None,
     ) -> None:
         allowed = {"Pendiente", "Aprobada", "Corregida", "Descartada"}
         if status not in allowed:
             raise ValueError("Estado de revisión no válido.")
+        custom_json = json.dumps(custom_classification or {}, ensure_ascii=False)
         with self._connect() as connection:
             if document_year is None:
                 connection.execute(
-                    "UPDATE classifications SET final_code=?, status=?, reviewer_notes=?, updated_at=? WHERE id=?",
-                    (final_code.strip(), status, notes.strip(), utc_now(), classification_id),
+                    """UPDATE classifications SET final_code=?, status=?, reviewer_notes=?,
+                       custom_classification_json=?, updated_at=? WHERE id=?""",
+                    (final_code.strip(), status, notes.strip(), custom_json, utc_now(), classification_id),
                 )
             else:
                 year = str(document_year).strip()
@@ -308,8 +384,8 @@ class Database:
                     raise ValueError("El año documental debe tener cuatro dígitos.")
                 connection.execute(
                     """UPDATE classifications SET final_code=?, document_year=?, status=?, reviewer_notes=?,
-                       updated_at=? WHERE id=?""",
-                    (final_code.strip(), year, status, notes.strip(), utc_now(), classification_id),
+                       custom_classification_json=?, updated_at=? WHERE id=?""",
+                    (final_code.strip(), year, status, notes.strip(), custom_json, utc_now(), classification_id),
                 )
 
     def learned_examples(self, limit: int = 2_000) -> list[dict[str, str]]:

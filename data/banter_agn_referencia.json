@@ -1,0 +1,1528 @@
+{
+  "metadata": {
+    "name": "Banco local de referencia para consulta BANTER",
+    "source_name": "Banco Terminológico de series y subseries documentales comunes — Archivo General de la Nación",
+    "source_url": "https://observatorioagn.archivogeneral.gov.co/banter/",
+    "source_version": "2.1",
+    "generated": "2026-07-12",
+    "terms": 104,
+    "scope": "Semilla local orientativa para búsqueda y denominación de carpetas sin código. No es un espejo íntegro del portal BANTER ni reemplaza la TRD/CCD aprobada.",
+    "curation_note": "Incluye términos publicados/indexados por el AGN y vocabulario archivístico transversal y sanitario para apoyar la revisión humana. Toda selección BANTER queda sin código y exige validación institucional."
+  },
+  "terms": [
+    {
+      "series_name": "ACCIONES CONSTITUCIONALES",
+      "subseries_name": "Acciones de Cumplimiento",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "acción de cumplimiento",
+        "demanda de cumplimiento"
+      ],
+      "document_types": [
+        "Acciones de Cumplimiento"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de acciones de cumplimiento en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "ACCIONES CONSTITUCIONALES",
+      "subseries_name": "Acciones de Grupo",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "acción de grupo",
+        "reparación colectiva"
+      ],
+      "document_types": [
+        "Acciones de Grupo"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de acciones de grupo en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "ACCIONES CONSTITUCIONALES",
+      "subseries_name": "Acciones de Tutela",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "tutela",
+        "fallo de tutela",
+        "incidente de desacato"
+      ],
+      "document_types": [
+        "Acciones de Tutela"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de acciones de tutela en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "ACCIONES CONSTITUCIONALES",
+      "subseries_name": "Acciones Populares",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "acción popular",
+        "derechos colectivos"
+      ],
+      "document_types": [
+        "Acciones Populares"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de acciones populares en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "ACTAS",
+      "subseries_name": "Actas de Asamblea",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "asamblea",
+        "acta de asamblea"
+      ],
+      "document_types": [
+        "Acta",
+        "Anexos",
+        "Listado de asistencia"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de actas de asamblea en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "ACTAS",
+      "subseries_name": "Actas de Comité de Archivo",
+      "functional_group": "Gestión documental y archivo",
+      "aliases": [
+        "comité de archivo",
+        "comité institucional de gestión y desempeño"
+      ],
+      "document_types": [
+        "Acta",
+        "Anexos",
+        "Listado de asistencia"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de actas de comité de archivo en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "ACTAS",
+      "subseries_name": "Actas de Comité de Conciliación",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "comité de conciliación",
+        "conciliación judicial"
+      ],
+      "document_types": [
+        "Acta",
+        "Anexos",
+        "Listado de asistencia"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de actas de comité de conciliación en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "ACTAS",
+      "subseries_name": "Actas de Comité de Convivencia Laboral",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "convivencia laboral",
+        "acoso laboral"
+      ],
+      "document_types": [
+        "Acta",
+        "Anexos",
+        "Listado de asistencia"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de actas de comité de convivencia laboral en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "ACTAS",
+      "subseries_name": "Actas de Comité de Seguridad y Salud en el Trabajo",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "copasst",
+        "seguridad y salud en el trabajo"
+      ],
+      "document_types": [
+        "Acta",
+        "Anexos",
+        "Listado de asistencia"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de actas de comité de seguridad y salud en el trabajo en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "ACTAS",
+      "subseries_name": "Actas de Comité Directivo",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "comité directivo",
+        "junta directiva"
+      ],
+      "document_types": [
+        "Acta",
+        "Anexos",
+        "Listado de asistencia"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de actas de comité directivo en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "ACTAS",
+      "subseries_name": "Actas de Eliminación Documental",
+      "functional_group": "Gestión documental y archivo",
+      "aliases": [
+        "eliminación documental",
+        "acta de eliminación"
+      ],
+      "document_types": [
+        "Acta",
+        "Anexos",
+        "Listado de asistencia"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de actas de eliminación documental en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "ACTAS",
+      "subseries_name": "Actas de Entrega",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "acta de entrega",
+        "entrega y recibo"
+      ],
+      "document_types": [
+        "Acta",
+        "Anexos",
+        "Listado de asistencia"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de actas de entrega en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "ACTAS",
+      "subseries_name": "Actas de Reunión",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "reunión",
+        "mesa de trabajo"
+      ],
+      "document_types": [
+        "Acta",
+        "Anexos",
+        "Listado de asistencia"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de actas de reunión en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "ACTAS",
+      "subseries_name": "Actas de Posesión",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "posesión",
+        "acta de posesión"
+      ],
+      "document_types": [
+        "Acta",
+        "Anexos",
+        "Listado de asistencia"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de actas de posesión en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "ACTOS ADMINISTRATIVOS",
+      "subseries_name": "Acuerdos",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "acuerdo",
+        "acto colegiado"
+      ],
+      "document_types": [
+        "Acuerdos"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de acuerdos en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "ACTOS ADMINISTRATIVOS",
+      "subseries_name": "Circulares",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "circular",
+        "instrucción interna"
+      ],
+      "document_types": [
+        "Circulares"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de circulares en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "ACTOS ADMINISTRATIVOS",
+      "subseries_name": "Directivas",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "directiva",
+        "lineamiento"
+      ],
+      "document_types": [
+        "Directivas"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de directivas en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "ACTOS ADMINISTRATIVOS",
+      "subseries_name": "Resoluciones",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "resolución",
+        "acto administrativo"
+      ],
+      "document_types": [
+        "Resoluciones"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de resoluciones en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "AUDITORÍAS",
+      "subseries_name": "Auditorías Internas",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "auditoría interna",
+        "plan de auditoría",
+        "hallazgos"
+      ],
+      "document_types": [
+        "Auditorías Internas"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de auditorías internas en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "AUDITORÍAS",
+      "subseries_name": "Auditorías Externas",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "auditoría externa",
+        "ente de control"
+      ],
+      "document_types": [
+        "Auditorías Externas"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de auditorías externas en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "AUDITORÍAS",
+      "subseries_name": "Auditorías de Calidad",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "auditoría de calidad",
+        "iso",
+        "sistema de gestión"
+      ],
+      "document_types": [
+        "Auditorías de Calidad"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de auditorías de calidad en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "COMUNICACIONES OFICIALES",
+      "subseries_name": "Comunicaciones Oficiales Recibidas",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "correspondencia recibida",
+        "radicado de entrada"
+      ],
+      "document_types": [
+        "Comunicaciones Oficiales Recibidas"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de comunicaciones oficiales recibidas en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "COMUNICACIONES OFICIALES",
+      "subseries_name": "Comunicaciones Oficiales Enviadas",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "correspondencia enviada",
+        "radicado de salida"
+      ],
+      "document_types": [
+        "Comunicaciones Oficiales Enviadas"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de comunicaciones oficiales enviadas en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "COMUNICACIONES OFICIALES",
+      "subseries_name": "Peticiones, Quejas, Reclamos, Sugerencias y Denuncias",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "pqrs",
+        "pqrsd",
+        "petición",
+        "queja",
+        "reclamo"
+      ],
+      "document_types": [
+        "Peticiones, Quejas, Reclamos, Sugerencias y Denuncias"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de peticiones, quejas, reclamos, sugerencias y denuncias en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "CONCEPTOS",
+      "subseries_name": "Conceptos Jurídicos",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "concepto jurídico",
+        "consulta jurídica"
+      ],
+      "document_types": [
+        "Conceptos Jurídicos"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de conceptos jurídicos en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "CONCEPTOS",
+      "subseries_name": "Conceptos Técnicos",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "concepto técnico",
+        "evaluación técnica"
+      ],
+      "document_types": [
+        "Conceptos Técnicos"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de conceptos técnicos en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "CONTRATOS",
+      "subseries_name": "Contratos de Arrendamiento",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "arrendamiento",
+        "canon",
+        "inmueble"
+      ],
+      "document_types": [
+        "Estudios previos",
+        "Contrato o convenio",
+        "Actas",
+        "Informes",
+        "Liquidación"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de contratos de arrendamiento en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "CONTRATOS",
+      "subseries_name": "Contratos de Compraventa",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "compraventa",
+        "adquisición"
+      ],
+      "document_types": [
+        "Estudios previos",
+        "Contrato o convenio",
+        "Actas",
+        "Informes",
+        "Liquidación"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de contratos de compraventa en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "CONTRATOS",
+      "subseries_name": "Contratos de Prestación de Servicios",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "prestación de servicios",
+        "contratista"
+      ],
+      "document_types": [
+        "Estudios previos",
+        "Contrato o convenio",
+        "Actas",
+        "Informes",
+        "Liquidación"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de contratos de prestación de servicios en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "CONTRATOS",
+      "subseries_name": "Contratos de Suministro",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "suministro",
+        "proveedor"
+      ],
+      "document_types": [
+        "Estudios previos",
+        "Contrato o convenio",
+        "Actas",
+        "Informes",
+        "Liquidación"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de contratos de suministro en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "CONTRATOS",
+      "subseries_name": "Contratos de Obra",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "obra",
+        "interventoría"
+      ],
+      "document_types": [
+        "Estudios previos",
+        "Contrato o convenio",
+        "Actas",
+        "Informes",
+        "Liquidación"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de contratos de obra en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "CONTRATOS",
+      "subseries_name": "Convenios Interadministrativos",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "convenio interadministrativo",
+        "cooperación"
+      ],
+      "document_types": [
+        "Estudios previos",
+        "Contrato o convenio",
+        "Actas",
+        "Informes",
+        "Liquidación"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de convenios interadministrativos en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "CUENTAS",
+      "subseries_name": "Cuentas por Cobrar",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "cuenta por cobrar",
+        "cartera"
+      ],
+      "document_types": [
+        "Cuentas por Cobrar"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de cuentas por cobrar en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "CUENTAS",
+      "subseries_name": "Cuentas por Pagar",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "cuenta por pagar",
+        "obligación",
+        "factura proveedor"
+      ],
+      "document_types": [
+        "Cuentas por Pagar"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de cuentas por pagar en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "HISTORIAS",
+      "subseries_name": "Historias Clínicas",
+      "functional_group": "Gestión asistencial y salud",
+      "aliases": [
+        "historia clínica",
+        "registro clínico",
+        "paciente"
+      ],
+      "document_types": [
+        "Apertura de expediente",
+        "Documentos soporte",
+        "Registros de seguimiento"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de historias clínicas en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "HISTORIAS",
+      "subseries_name": "Historias Laborales",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "historia laboral",
+        "hoja de vida",
+        "expediente laboral"
+      ],
+      "document_types": [
+        "Apertura de expediente",
+        "Documentos soporte",
+        "Registros de seguimiento"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de historias laborales en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "HISTORIAS",
+      "subseries_name": "Historias de Proveedores",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "proveedor",
+        "expediente de proveedor"
+      ],
+      "document_types": [
+        "Apertura de expediente",
+        "Documentos soporte",
+        "Registros de seguimiento"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de historias de proveedores en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "INFORMES",
+      "subseries_name": "Informes de Gestión",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "informe de gestión",
+        "rendición de cuentas"
+      ],
+      "document_types": [
+        "Informe",
+        "Anexos",
+        "Soportes"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de informes de gestión en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "INFORMES",
+      "subseries_name": "Informes de Auditoría",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "informe de auditoría",
+        "hallazgo"
+      ],
+      "document_types": [
+        "Informe",
+        "Anexos",
+        "Soportes"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de informes de auditoría en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "INFORMES",
+      "subseries_name": "Informes Financieros",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "informe financiero",
+        "estado financiero"
+      ],
+      "document_types": [
+        "Informe",
+        "Anexos",
+        "Soportes"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de informes financieros en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "INFORMES",
+      "subseries_name": "Informes de Seguimiento",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "informe de seguimiento",
+        "avance",
+        "cumplimiento"
+      ],
+      "document_types": [
+        "Informe",
+        "Anexos",
+        "Soportes"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de informes de seguimiento en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "INFORMES",
+      "subseries_name": "Informes Estadísticos",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "estadístico",
+        "indicadores",
+        "consolidado"
+      ],
+      "document_types": [
+        "Informe",
+        "Anexos",
+        "Soportes"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de informes estadísticos en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "INFORMES",
+      "subseries_name": "Informes de Vigilancia Epidemiológica",
+      "functional_group": "Gestión asistencial y salud",
+      "aliases": [
+        "vigilancia epidemiológica",
+        "evento de interés en salud pública"
+      ],
+      "document_types": [
+        "Informe",
+        "Anexos",
+        "Soportes"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de informes de vigilancia epidemiológica en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "INFORMES",
+      "subseries_name": "Informes de Seguridad del Paciente",
+      "functional_group": "Gestión asistencial y salud",
+      "aliases": [
+        "seguridad del paciente",
+        "evento adverso"
+      ],
+      "document_types": [
+        "Informe",
+        "Anexos",
+        "Soportes"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de informes de seguridad del paciente en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "INSTRUMENTOS ARCHIVÍSTICOS",
+      "subseries_name": "Bancos Terminológicos de Series y Subseries Documentales",
+      "functional_group": "Gestión documental y archivo",
+      "aliases": [
+        "banter",
+        "banco terminológico"
+      ],
+      "document_types": [
+        "Bancos Terminológicos de Series y Subseries Documentales"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de bancos terminológicos de series y subseries documentales en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "INSTRUMENTOS ARCHIVÍSTICOS",
+      "subseries_name": "Cuadros de Clasificación Documental",
+      "functional_group": "Gestión documental y archivo",
+      "aliases": [
+        "ccd",
+        "cuadro de clasificación documental"
+      ],
+      "document_types": [
+        "Cuadros de Clasificación Documental"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de cuadros de clasificación documental en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "INSTRUMENTOS ARCHIVÍSTICOS",
+      "subseries_name": "Programas de Gestión Documental",
+      "functional_group": "Gestión documental y archivo",
+      "aliases": [
+        "pgd",
+        "programa de gestión documental"
+      ],
+      "document_types": [
+        "Programa",
+        "Plan de trabajo",
+        "Informe de seguimiento"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de programas de gestión documental en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "INSTRUMENTOS ARCHIVÍSTICOS",
+      "subseries_name": "Tablas de Control de Acceso",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "tca",
+        "tabla de control de acceso"
+      ],
+      "document_types": [
+        "Tablas de Control de Acceso"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de tablas de control de acceso en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "INSTRUMENTOS ARCHIVÍSTICOS",
+      "subseries_name": "Tablas de Retención Documental",
+      "functional_group": "Gestión documental y archivo",
+      "aliases": [
+        "trd",
+        "tabla de retención documental"
+      ],
+      "document_types": [
+        "Tablas de Retención Documental"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de tablas de retención documental en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "INSTRUMENTOS ARCHIVÍSTICOS",
+      "subseries_name": "Tablas de Valoración Documental",
+      "functional_group": "Gestión documental y archivo",
+      "aliases": [
+        "tvd",
+        "tabla de valoración documental"
+      ],
+      "document_types": [
+        "Tablas de Valoración Documental"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de tablas de valoración documental en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "INSTRUMENTOS ARCHIVÍSTICOS",
+      "subseries_name": "Planes Institucionales de Archivos",
+      "functional_group": "Gestión documental y archivo",
+      "aliases": [
+        "pinar",
+        "plan institucional de archivos"
+      ],
+      "document_types": [
+        "Plan",
+        "Cronograma",
+        "Seguimiento",
+        "Anexos"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de planes institucionales de archivos en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "INSTRUMENTOS DE CONTROL",
+      "subseries_name": "Instrumentos de Control de Correspondencia",
+      "functional_group": "Gestión documental y archivo",
+      "aliases": [
+        "planilla de correspondencia",
+        "control de radicación"
+      ],
+      "document_types": [
+        "Formato de control",
+        "Registro",
+        "Reporte"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de instrumentos de control de correspondencia en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "INSTRUMENTOS DE CONTROL",
+      "subseries_name": "Instrumentos de Control de Préstamo Documental",
+      "functional_group": "Gestión documental y archivo",
+      "aliases": [
+        "préstamo documental",
+        "consulta de expedientes"
+      ],
+      "document_types": [
+        "Formato de control",
+        "Registro",
+        "Reporte"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de instrumentos de control de préstamo documental en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "INSTRUMENTOS DE CONTROL",
+      "subseries_name": "Instrumentos de Control de Temperatura y Humedad",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "temperatura",
+        "humedad relativa",
+        "control ambiental de archivo"
+      ],
+      "document_types": [
+        "Formato de control",
+        "Registro",
+        "Reporte"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de instrumentos de control de temperatura y humedad en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "INSTRUMENTOS DE CONTROL",
+      "subseries_name": "Instrumentos de Control de Inventarios",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "control de inventario",
+        "kardex"
+      ],
+      "document_types": [
+        "Formato de control",
+        "Registro",
+        "Reporte"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de instrumentos de control de inventarios en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "INSTRUMENTOS DE CONTROL",
+      "subseries_name": "Instrumentos de Control de Almacenamiento",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "almacenamiento",
+        "cadena de frío",
+        "control de bodega"
+      ],
+      "document_types": [
+        "Formato de control",
+        "Registro",
+        "Reporte"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de instrumentos de control de almacenamiento en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "INVENTARIOS",
+      "subseries_name": "Inventarios Documentales",
+      "functional_group": "Gestión documental y archivo",
+      "aliases": [
+        "inventario documental",
+        "fuid",
+        "formato único de inventario documental"
+      ],
+      "document_types": [
+        "Inventarios Documentales"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de inventarios documentales en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "INVENTARIOS",
+      "subseries_name": "Inventarios de Bienes",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "inventario de bienes",
+        "activo fijo"
+      ],
+      "document_types": [
+        "Inventarios de Bienes"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de inventarios de bienes en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "INVENTARIOS",
+      "subseries_name": "Inventarios de Medicamentos",
+      "functional_group": "Gestión asistencial y salud",
+      "aliases": [
+        "inventario de medicamentos",
+        "existencias de farmacia"
+      ],
+      "document_types": [
+        "Inventarios de Medicamentos"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de inventarios de medicamentos en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "INVENTARIOS",
+      "subseries_name": "Inventarios de Insumos",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "inventario de insumos",
+        "material médico"
+      ],
+      "document_types": [
+        "Inventarios de Insumos"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de inventarios de insumos en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "LIBROS DE REGISTRO",
+      "subseries_name": "Libros de Registro de Correspondencia",
+      "functional_group": "Gestión documental y archivo",
+      "aliases": [
+        "libro radicador",
+        "registro de correspondencia"
+      ],
+      "document_types": [
+        "Libros de Registro de Correspondencia"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de libros de registro de correspondencia en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "LIBROS DE REGISTRO",
+      "subseries_name": "Libros de Registro de Participación Ciudadana",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "participación ciudadana",
+        "registro de asistentes"
+      ],
+      "document_types": [
+        "Libros de Registro de Participación Ciudadana"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de libros de registro de participación ciudadana en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "LIBROS DE REGISTRO",
+      "subseries_name": "Libros de Registro Contable",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "libro contable",
+        "mayor y balances"
+      ],
+      "document_types": [
+        "Libros de Registro Contable"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de libros de registro contable en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "MANUALES",
+      "subseries_name": "Manuales de Funciones",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "manual de funciones",
+        "competencias laborales"
+      ],
+      "document_types": [
+        "Manuales de Funciones"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de manuales de funciones en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "MANUALES",
+      "subseries_name": "Manuales de Procesos y Procedimientos",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "manual de procesos",
+        "procedimiento"
+      ],
+      "document_types": [
+        "Manuales de Procesos y Procedimientos"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de manuales de procesos y procedimientos en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "MANUALES",
+      "subseries_name": "Manuales del Sistema de Gestión",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "manual de calidad",
+        "sistema de gestión"
+      ],
+      "document_types": [
+        "Manuales del Sistema de Gestión"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de manuales del sistema de gestión en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "PLANES",
+      "subseries_name": "Planes de Acción Institucional",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "plan de acción",
+        "metas institucionales"
+      ],
+      "document_types": [
+        "Plan",
+        "Cronograma",
+        "Seguimiento",
+        "Anexos"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de planes de acción institucional en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "PLANES",
+      "subseries_name": "Planes Anuales de Adquisiciones",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "plan anual de adquisiciones",
+        "paa"
+      ],
+      "document_types": [
+        "Plan",
+        "Cronograma",
+        "Seguimiento",
+        "Anexos"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de planes anuales de adquisiciones en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "PLANES",
+      "subseries_name": "Planes de Auditoría",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "plan anual de auditoría",
+        "programación de auditoría"
+      ],
+      "document_types": [
+        "Plan",
+        "Cronograma",
+        "Seguimiento",
+        "Anexos"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de planes de auditoría en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "PLANES",
+      "subseries_name": "Planes de Capacitación",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "plan de capacitación",
+        "pic"
+      ],
+      "document_types": [
+        "Plan",
+        "Cronograma",
+        "Seguimiento",
+        "Anexos"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de planes de capacitación en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "PLANES",
+      "subseries_name": "Planes de Conservación Documental",
+      "functional_group": "Gestión documental y archivo",
+      "aliases": [
+        "conservación documental",
+        "sic"
+      ],
+      "document_types": [
+        "Plan",
+        "Cronograma",
+        "Seguimiento",
+        "Anexos"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de planes de conservación documental en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "PLANES",
+      "subseries_name": "Planes de Emergencias y Contingencias",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "emergencias",
+        "contingencia"
+      ],
+      "document_types": [
+        "Plan",
+        "Cronograma",
+        "Seguimiento",
+        "Anexos"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de planes de emergencias y contingencias en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "PLANES",
+      "subseries_name": "Planes de Gestión Ambiental",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "gestión ambiental",
+        "piga"
+      ],
+      "document_types": [
+        "Plan",
+        "Cronograma",
+        "Seguimiento",
+        "Anexos"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de planes de gestión ambiental en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "PLANES",
+      "subseries_name": "Planes de Mejoramiento",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "plan de mejoramiento",
+        "acción correctiva"
+      ],
+      "document_types": [
+        "Plan",
+        "Cronograma",
+        "Seguimiento",
+        "Anexos"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de planes de mejoramiento en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "PLANES",
+      "subseries_name": "Planes de Preservación Digital a Largo Plazo",
+      "functional_group": "Gestión documental y archivo",
+      "aliases": [
+        "preservación digital",
+        "documentos electrónicos"
+      ],
+      "document_types": [
+        "Plan",
+        "Cronograma",
+        "Seguimiento",
+        "Anexos"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de planes de preservación digital a largo plazo en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "PLANES",
+      "subseries_name": "Planes de Transferencias Documentales Primarias",
+      "functional_group": "Gestión documental y archivo",
+      "aliases": [
+        "transferencia primaria",
+        "archivo central"
+      ],
+      "document_types": [
+        "Plan",
+        "Cronograma",
+        "Seguimiento",
+        "Anexos"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de planes de transferencias documentales primarias en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "PLANES",
+      "subseries_name": "Planes de Transferencias Documentales Secundarias",
+      "functional_group": "Gestión documental y archivo",
+      "aliases": [
+        "transferencia secundaria",
+        "archivo histórico"
+      ],
+      "document_types": [
+        "Plan",
+        "Cronograma",
+        "Seguimiento",
+        "Anexos"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de planes de transferencias documentales secundarias en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "PLANES",
+      "subseries_name": "Planes de Seguridad y Privacidad de la Información",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "seguridad de la información",
+        "privacidad"
+      ],
+      "document_types": [
+        "Plan",
+        "Cronograma",
+        "Seguimiento",
+        "Anexos"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de planes de seguridad y privacidad de la información en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "PROGRAMAS",
+      "subseries_name": "Programas de Bienestar Social",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "bienestar social",
+        "bienestar laboral"
+      ],
+      "document_types": [
+        "Programa",
+        "Plan de trabajo",
+        "Informe de seguimiento"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de programas de bienestar social en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "PROGRAMAS",
+      "subseries_name": "Programas de Capacitación",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "capacitación",
+        "formación"
+      ],
+      "document_types": [
+        "Programa",
+        "Plan de trabajo",
+        "Informe de seguimiento"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de programas de capacitación en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "PROGRAMAS",
+      "subseries_name": "Programas de Gestión Documental",
+      "functional_group": "Gestión documental y archivo",
+      "aliases": [
+        "gestión documental",
+        "pgd"
+      ],
+      "document_types": [
+        "Programa",
+        "Plan de trabajo",
+        "Informe de seguimiento"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de programas de gestión documental en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "PROGRAMAS",
+      "subseries_name": "Programas de Salud Ocupacional",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "salud ocupacional",
+        "sg-sst"
+      ],
+      "document_types": [
+        "Programa",
+        "Plan de trabajo",
+        "Informe de seguimiento"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de programas de salud ocupacional en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "PROGRAMAS",
+      "subseries_name": "Programas de Seguridad del Paciente",
+      "functional_group": "Gestión asistencial y salud",
+      "aliases": [
+        "seguridad del paciente",
+        "evento adverso"
+      ],
+      "document_types": [
+        "Programa",
+        "Plan de trabajo",
+        "Informe de seguimiento"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de programas de seguridad del paciente en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "PROGRAMAS",
+      "subseries_name": "Programas de Farmacovigilancia",
+      "functional_group": "Gestión asistencial y salud",
+      "aliases": [
+        "farmacovigilancia",
+        "reacción adversa a medicamento"
+      ],
+      "document_types": [
+        "Programa",
+        "Plan de trabajo",
+        "Informe de seguimiento"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de programas de farmacovigilancia en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "PROGRAMAS",
+      "subseries_name": "Programas de Tecnovigilancia",
+      "functional_group": "Gestión asistencial y salud",
+      "aliases": [
+        "tecnovigilancia",
+        "dispositivo médico"
+      ],
+      "document_types": [
+        "Programa",
+        "Plan de trabajo",
+        "Informe de seguimiento"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de programas de tecnovigilancia en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "PROGRAMAS",
+      "subseries_name": "Programas de Humanización de la Atención",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "humanización",
+        "atención al usuario"
+      ],
+      "document_types": [
+        "Programa",
+        "Plan de trabajo",
+        "Informe de seguimiento"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de programas de humanización de la atención en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "PROYECTOS",
+      "subseries_name": "Proyectos de Inversión",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "proyecto de inversión",
+        "bpin"
+      ],
+      "document_types": [
+        "Proyectos de Inversión"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de proyectos de inversión en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "PROYECTOS",
+      "subseries_name": "Proyectos de Investigación",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "proyecto de investigación",
+        "protocolo de investigación"
+      ],
+      "document_types": [
+        "Proyectos de Investigación"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de proyectos de investigación en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "PROYECTOS",
+      "subseries_name": "Proyectos de Infraestructura",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "infraestructura",
+        "adecuación"
+      ],
+      "document_types": [
+        "Proyectos de Infraestructura"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de proyectos de infraestructura en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "REGISTROS",
+      "subseries_name": "Registros de Atención al Usuario",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "atención al usuario",
+        "orientación al usuario"
+      ],
+      "document_types": [
+        "Registro",
+        "Formato de control",
+        "Reporte"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de registros de atención al usuario en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "REGISTROS",
+      "subseries_name": "Registros de Control de Acceso",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "control de acceso",
+        "ingreso de visitantes"
+      ],
+      "document_types": [
+        "Registro",
+        "Formato de control",
+        "Reporte"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de registros de control de acceso en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "REGISTROS",
+      "subseries_name": "Registros de Mantenimiento",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "mantenimiento",
+        "hoja de vida de equipo"
+      ],
+      "document_types": [
+        "Registro",
+        "Formato de control",
+        "Reporte"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de registros de mantenimiento en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "REGISTROS",
+      "subseries_name": "Registros de Temperatura y Humedad",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "temperatura y humedad",
+        "control ambiental"
+      ],
+      "document_types": [
+        "Registro",
+        "Formato de control",
+        "Reporte"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de registros de temperatura y humedad en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "REGISTROS",
+      "subseries_name": "Registros de Vacunación",
+      "functional_group": "Gestión asistencial y salud",
+      "aliases": [
+        "vacunación",
+        "esquema de vacunación"
+      ],
+      "document_types": [
+        "Registro",
+        "Formato de control",
+        "Reporte"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de registros de vacunación en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "REGISTROS",
+      "subseries_name": "Registros de Esterilización",
+      "functional_group": "Gestión asistencial y salud",
+      "aliases": [
+        "esterilización",
+        "autoclave",
+        "control biológico"
+      ],
+      "document_types": [
+        "Registro",
+        "Formato de control",
+        "Reporte"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de registros de esterilización en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "SISTEMAS DE INFORMACIÓN",
+      "subseries_name": "Inventarios de Activos de Información",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "activo de información",
+        "índice de información"
+      ],
+      "document_types": [
+        "Inventarios de Activos de Información"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de inventarios de activos de información en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "SISTEMAS DE INFORMACIÓN",
+      "subseries_name": "Registros de Incidentes de Seguridad",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "incidente de seguridad",
+        "ciberseguridad"
+      ],
+      "document_types": [
+        "Registro",
+        "Formato de control",
+        "Reporte"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de registros de incidentes de seguridad en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "SISTEMAS DE INFORMACIÓN",
+      "subseries_name": "Solicitudes de Soporte Tecnológico",
+      "functional_group": "Gestión asistencial y salud",
+      "aliases": [
+        "mesa de ayuda",
+        "ticket",
+        "soporte técnico"
+      ],
+      "document_types": [
+        "Solicitudes de Soporte Tecnológico"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de solicitudes de soporte tecnológico en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "SISTEMAS DE INFORMACIÓN",
+      "subseries_name": "Copias de Seguridad",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "backup",
+        "copia de seguridad"
+      ],
+      "document_types": [
+        "Copias de Seguridad"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de copias de seguridad en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "SOLICITUDES",
+      "subseries_name": "Solicitudes de Acceso a la Información",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "acceso a información pública",
+        "ley de transparencia"
+      ],
+      "document_types": [
+        "Solicitudes de Acceso a la Información"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de solicitudes de acceso a la información en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "SOLICITUDES",
+      "subseries_name": "Solicitudes de Servicio",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "solicitud de servicio",
+        "requerimiento"
+      ],
+      "document_types": [
+        "Solicitudes de Servicio"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de solicitudes de servicio en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "SOLICITUDES",
+      "subseries_name": "Solicitudes de Compra",
+      "functional_group": "Gestión administrativa transversal",
+      "aliases": [
+        "requisición",
+        "solicitud de compra"
+      ],
+      "document_types": [
+        "Solicitudes de Compra"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de solicitudes de compra en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "TRANSFERENCIAS DOCUMENTALES",
+      "subseries_name": "Transferencias Documentales Primarias",
+      "functional_group": "Gestión documental y archivo",
+      "aliases": [
+        "transferencia primaria",
+        "archivo de gestión"
+      ],
+      "document_types": [
+        "Transferencias Documentales Primarias"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de transferencias documentales primarias en cumplimiento de las funciones de la entidad."
+    },
+    {
+      "series_name": "TRANSFERENCIAS DOCUMENTALES",
+      "subseries_name": "Transferencias Documentales Secundarias",
+      "functional_group": "Gestión documental y archivo",
+      "aliases": [
+        "transferencia secundaria",
+        "archivo histórico"
+      ],
+      "document_types": [
+        "Transferencias Documentales Secundarias"
+      ],
+      "definition": "Agrupación documental asociada a la producción y conservación de transferencias documentales secundarias en cumplimiento de las funciones de la entidad."
+    }
+  ]
+}

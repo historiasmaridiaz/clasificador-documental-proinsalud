@@ -4,7 +4,9 @@ import csv
 import hashlib
 import io
 import json
+import os
 import re
+import shutil
 import unicodedata
 import zipfile
 from collections import Counter
@@ -143,35 +145,128 @@ def _decode_text(data: bytes) -> str:
     return data.decode("utf-8", errors="replace")
 
 
-def _run_tesseract(image: Any, language: str) -> tuple[str, str]:
+def _candidate_tesseract_commands() -> list[str]:
+    candidates: list[str] = []
+    configured = os.environ.get("TESSERACT_CMD", "").strip()
+    if configured:
+        candidates.append(configured)
+    located = shutil.which("tesseract")
+    if located:
+        candidates.append(located)
+    if os.name == "nt":
+        roots = [
+            os.environ.get("PROGRAMFILES", r"C:\Program Files"),
+            os.environ.get("PROGRAMFILES(X86)", r"C:\Program Files (x86)"),
+            os.environ.get("LOCALAPPDATA", ""),
+        ]
+        relatives = [
+            Path("Tesseract-OCR") / "tesseract.exe",
+            Path("Programs") / "Tesseract-OCR" / "tesseract.exe",
+        ]
+        for root in roots:
+            if not root:
+                continue
+            for relative in relatives:
+                candidates.append(str(Path(root) / relative))
+    unique: list[str] = []
+    seen: set[str] = set()
+    for candidate in candidates:
+        key = os.path.normcase(os.path.abspath(candidate)) if candidate else ""
+        if candidate and key not in seen:
+            seen.add(key)
+            unique.append(candidate)
+    return unique
+
+
+def tesseract_status() -> dict[str, Any]:
+    """Informa si el motor OCR local está disponible y configura pytesseract."""
+    for command in _candidate_tesseract_commands():
+        if Path(command).is_file() or shutil.which(command):
+            try:
+                import pytesseract
+
+                pytesseract.pytesseract.tesseract_cmd = command
+                version = str(pytesseract.get_tesseract_version())
+                return {"available": True, "command": command, "version": version}
+            except Exception:
+                continue
     try:
         import pytesseract
 
-        try:
-            return pytesseract.image_to_string(image, lang=language), language
-        except Exception as first_error:
-            try:
-                return pytesseract.image_to_string(image), "predeterminado"
-            except Exception:
-                raise first_error
-    except ImportError:
-        import subprocess
-        import tempfile
+        version = str(pytesseract.get_tesseract_version())
+        return {
+            "available": True,
+            "command": str(getattr(pytesseract.pytesseract, "tesseract_cmd", "tesseract")),
+            "version": version,
+        }
+    except Exception as exc:
+        return {"available": False, "command": "", "version": "", "error": str(exc)}
 
-        with tempfile.NamedTemporaryFile(suffix=".png") as temporary:
-            image.save(temporary.name, format="PNG")
-            commands = [
-                ["tesseract", temporary.name, "stdout", "-l", language],
-                ["tesseract", temporary.name, "stdout"],
-            ]
-            last_error = "Tesseract no disponible"
-            for command in commands:
-                completed = subprocess.run(command, capture_output=True, text=True, timeout=120, check=False)
-                if completed.returncode == 0:
-                    used = language if "-l" in command else "predeterminado"
-                    return completed.stdout, used
-                last_error = completed.stderr.strip() or last_error
-            raise RuntimeError(last_error)
+
+def _prepare_ocr_image(image: Any) -> Any:
+    from PIL import ImageOps
+
+    prepared = ImageOps.exif_transpose(image).convert("RGB")
+    if prepared.width < 1_600:
+        factor = min(2.5, 1_600 / max(1, prepared.width))
+        prepared = prepared.resize(
+            (int(prepared.width * factor), int(prepared.height * factor)),
+        )
+    grayscale = ImageOps.grayscale(prepared)
+    return ImageOps.autocontrast(grayscale)
+
+
+def _run_tesseract(image: Any, language: str) -> tuple[str, str]:
+    status = tesseract_status()
+    if not status.get("available"):
+        raise RuntimeError(
+            "Tesseract OCR no está instalado o no fue detectado. "
+            "Instale Tesseract OCR con el paquete de idioma español o defina TESSERACT_CMD."
+        )
+    import pytesseract
+
+    command = str(status.get("command") or "")
+    if command:
+        pytesseract.pytesseract.tesseract_cmd = command
+    prepared = _prepare_ocr_image(image)
+    preferred_languages = [language]
+    if "spa" not in preferred_languages:
+        preferred_languages.append("spa")
+    if "eng" not in preferred_languages:
+        preferred_languages.append("eng")
+    preferred_languages.append("")
+    attempts = []
+    for used_language in preferred_languages:
+        attempts.append((used_language, "--oem 3 --psm 6"))
+        attempts.append((used_language, "--oem 3 --psm 3"))
+    last_error: Exception | None = None
+    for used_language, config in attempts:
+        try:
+            kwargs: dict[str, Any] = {"config": config}
+            if used_language:
+                kwargs["lang"] = used_language
+            value = pytesseract.image_to_string(prepared, **kwargs)
+            return value, used_language or "predeterminado"
+        except Exception as exc:
+            last_error = exc
+    raise RuntimeError(str(last_error or "No fue posible ejecutar Tesseract OCR"))
+
+
+def _merge_digital_and_ocr(digital_text: str, ocr_text: str) -> str:
+    digital = (digital_text or "").strip()
+    ocr = (ocr_text or "").strip()
+    if not digital:
+        return ocr
+    if not ocr:
+        return digital
+    digital_tokens = set(re.findall(r"[a-z0-9]{3,}", unicodedata.normalize("NFKD", digital.lower())))
+    ocr_tokens = set(re.findall(r"[a-z0-9]{3,}", unicodedata.normalize("NFKD", ocr.lower())))
+    novelty = len(ocr_tokens - digital_tokens) / max(1, len(ocr_tokens))
+    if novelty < 0.08:
+        return digital if len(digital) >= len(ocr) else ocr
+    # OCR se coloca primero para conservar títulos, sellos y encabezados que suelen
+    # perderse en la capa digital; el texto digital completa tablas y párrafos.
+    return f"{ocr}\n\n[TEXTO DIGITAL COMPLEMENTARIO]\n{digital}"
 
 
 def _extract_pdf(
@@ -179,6 +274,7 @@ def _extract_pdf(
     enable_ocr: bool = True,
     ocr_language: str = "spa+eng",
     max_ocr_pages: int = 50,
+    ocr_mode: str = "all",
 ) -> tuple[str, dict[str, Any], list[str]]:
     from pypdf import PdfReader
 
@@ -188,52 +284,83 @@ def _extract_pdf(
             reader.decrypt("")
         except Exception as exc:
             raise ValueError("PDF protegido con contraseña") from exc
-    pages = []
-    empty_pages = 0
+
+    digital_pages: list[str] = []
     for page in reader.pages:
-        value = page.extract_text() or ""
-        pages.append(value)
-        if not value.strip():
-            empty_pages += 1
+        digital_pages.append(page.extract_text() or "")
+    pages = list(digital_pages)
     warnings: list[str] = []
     ocr_pages: list[int] = []
     ocr_language_used = ""
-    pages_needing_ocr = [index for index, value in enumerate(pages) if len(value.strip()) < 40]
-    if enable_ocr and pages_needing_ocr:
-        try:
-            import fitz
-            from PIL import Image
 
-            document = fitz.open(stream=data, filetype="pdf")
-            for index in pages_needing_ocr[:max_ocr_pages]:
-                page = document.load_page(index)
-                pixmap = page.get_pixmap(matrix=fitz.Matrix(2.5, 2.5), colorspace=fitz.csRGB, alpha=False)
-                image = Image.open(io.BytesIO(pixmap.tobytes("png")))
-                ocr_text, ocr_language_used = _run_tesseract(image, ocr_language)
-                if ocr_text.strip():
-                    pages[index] = ocr_text
-                    ocr_pages.append(index + 1)
-            document.close()
-            if len(pages_needing_ocr) > max_ocr_pages:
-                warnings.append(
-                    f"El OCR se limitó a {max_ocr_pages} páginas; quedaron {len(pages_needing_ocr) - max_ocr_pages} pendientes."
-                )
-        except Exception as exc:
-            warnings.append(f"No fue posible ejecutar OCR en el PDF: {exc}. Verifique Tesseract y PyMuPDF.")
+    mode = str(ocr_mode or "all").strip().lower()
+    if not enable_ocr:
+        mode = "off"
+    if mode not in {"all", "auto", "off"}:
+        mode = "auto"
+
+    if mode == "all":
+        pages_needing_ocr = list(range(len(pages)))
+    elif mode == "auto":
+        pages_needing_ocr = [index for index, value in enumerate(pages) if len(value.strip()) < 160]
+        # El encabezado de la primera página es decisivo para diferenciar, por ejemplo,
+        # un acta de comité de una simple mención a una tabla de retención.
+        if pages and 0 not in pages_needing_ocr:
+            pages_needing_ocr.insert(0, 0)
+    else:
+        pages_needing_ocr = []
+
+    if pages_needing_ocr:
+        status = tesseract_status()
+        if not status.get("available"):
+            warnings.append(
+                "OCR solicitado, pero Tesseract no está disponible. Se utilizó únicamente el texto digital. "
+                "Instale Tesseract OCR con idioma español o configure TESSERACT_CMD."
+            )
+        else:
+            try:
+                import fitz
+                from PIL import Image
+
+                document = fitz.open(stream=data, filetype="pdf")
+                limited_pages = pages_needing_ocr[: max(1, int(max_ocr_pages))]
+                for index in limited_pages:
+                    page = document.load_page(index)
+                    pixmap = page.get_pixmap(matrix=fitz.Matrix(2.6, 2.6), colorspace=fitz.csRGB, alpha=False)
+                    image = Image.open(io.BytesIO(pixmap.tobytes("png")))
+                    ocr_text, ocr_language_used = _run_tesseract(image, ocr_language)
+                    if ocr_text.strip():
+                        pages[index] = _merge_digital_and_ocr(digital_pages[index], ocr_text)
+                        ocr_pages.append(index + 1)
+                document.close()
+                if len(pages_needing_ocr) > len(limited_pages):
+                    warnings.append(
+                        f"El OCR se limitó a {len(limited_pages)} páginas; quedaron "
+                        f"{len(pages_needing_ocr) - len(limited_pages)} sin OCR."
+                    )
+            except Exception as exc:
+                warnings.append(f"No fue posible ejecutar OCR en el PDF: {exc}")
 
     remaining_empty = sum(not value.strip() for value in pages)
     if reader.pages and remaining_empty == len(reader.pages):
         warnings.append("El PDF no contiene texto extraíble y el OCR no produjo resultados.")
     elif remaining_empty:
         warnings.append(f"{remaining_empty} página(s) siguen sin texto después de la extracción/OCR.")
+
+    page_blocks = [f"=== PÁGINA {number} ===\n{value}" for number, value in enumerate(pages, start=1)]
     metadata = {
         "pages": len(reader.pages),
         "pdf_metadata": {str(k): str(v) for k, v in (reader.metadata or {}).items()},
+        "ocr_requested_mode": mode,
         "ocr_performed": bool(ocr_pages),
         "ocr_pages": ocr_pages,
+        "ocr_pages_requested": [index + 1 for index in pages_needing_ocr],
+        "ocr_coverage_percent": round(len(ocr_pages) / max(1, len(reader.pages)) * 100, 1),
         "ocr_language": ocr_language_used,
+        "digital_text_pages": sum(bool(value.strip()) for value in digital_pages),
     }
-    return "\n\n".join(pages), metadata, warnings
+    return "\n\n".join(page_blocks), metadata, warnings
+
 
 
 def _extract_docx(data: bytes) -> tuple[str, dict[str, Any], list[str]]:
@@ -415,6 +542,7 @@ def extract_document(
     enable_ocr: bool = True,
     ocr_language: str = "spa+eng",
     max_ocr_pages: int = 50,
+    ocr_mode: str = "all",
 ) -> ExtractedDocument:
     ext = payload.extension
     warnings: list[str] = []
@@ -429,6 +557,7 @@ def extract_document(
                 enable_ocr=enable_ocr,
                 ocr_language=ocr_language,
                 max_ocr_pages=max_ocr_pages,
+                ocr_mode=ocr_mode,
             )
         elif ext == ".docx":
             text, extra, warnings = _extract_docx(payload.data)
@@ -443,7 +572,15 @@ def extract_document(
         elif ext == ".eml":
             text, extra, warnings = _extract_email(payload.data)
         elif ext in IMAGE_EXTENSIONS:
-            text, extra, warnings = _extract_image_ocr(payload.data, ocr_language=ocr_language)
+            if enable_ocr and str(ocr_mode or "all").lower() != "off":
+                text, extra, warnings = _extract_image_ocr(payload.data, ocr_language=ocr_language)
+            else:
+                from PIL import Image
+
+                image = Image.open(io.BytesIO(payload.data))
+                text, extra, warnings = "", {"width": image.width, "height": image.height, "ocr": False}, [
+                    "La imagen requiere OCR para extraer texto; el OCR estaba desactivado."
+                ]
         elif ext in TEXT_EXTENSIONS:
             text, extra, warnings = _extract_plain(ext, payload.data)
         else:

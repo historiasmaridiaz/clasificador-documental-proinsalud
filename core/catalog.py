@@ -210,6 +210,11 @@ def _split_code(full_code: str, dependency_code: str) -> tuple[str, str]:
         remainder = full_parts[len(dep_parts) :]
     else:
         remainder = full_parts[1:]
+    # Algunas TRD repiten el último segmento de la dependencia antes de serie/subserie
+    # (ej. 2000.2.2.28.63). Se corrige solo cuando quedan tres o más segmentos,
+    # para no alterar códigos válidos como 2000.2.2.16.
+    if dep_parts and len(remainder) >= 3 and remainder[0] == dep_parts[-1]:
+        remainder = remainder[1:]
     series_code = remainder[0] if remainder else ""
     subseries_code = ".".join(remainder[1:]) if len(remainder) > 1 else ""
     return series_code, subseries_code
@@ -284,6 +289,9 @@ def parse_trd_sheet(ws: Any, source_name: str) -> list[dict[str, Any]]:
         next_row = anchors[index + 1] if index + 1 < len(anchors) else ws.max_row + 1
         code = normalize_code(ws.cell(row, 1).value)
         series_code, subseries_code = _split_code(code, dep_code)
+        # Normaliza la forma canónica dependencia.serie.subserie después de reparar
+        # segmentos duplicados presentes en algunas hojas fuente.
+        code = ".".join(value for value in [dep_code, series_code, subseries_code] if value)
         series_name = clean_text(ws.cell(row, 2).value)
         if not series_code or not series_name:
             continue

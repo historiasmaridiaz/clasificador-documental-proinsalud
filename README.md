@@ -1,54 +1,171 @@
-# Clasificador documental TRD/CCD — PROINSALUD
+# Gestión documental inteligente — PROINSALUD S.A.
 
-Aplicación web local en Python para cargar Tablas de Retención Documental (TRD), Cuadros de Clasificación Documental (CCD) y documentos por clasificar. Extrae contenido y OCR, detecta el año, propone códigos archivísticos mediante recuperación de información con *machine learning*, permite revisión humana y exporta una tabla o un ZIP organizado según el instructivo IAGED-10.
+Aplicación web local en Python y Streamlit para clasificar documentos con base en las Tablas de Retención Documental (TRD) y el Cuadro de Clasificación Documental (CCD) de PROINSALUD S.A.
 
-El proyecto viene preconfigurado con un catálogo normalizado a partir de `TRD PROINSALUD.rar`.
+Esta edición integra un módulo independiente para visualizar y descargar las TRD originales, el CCD por área y el organigrama; además conserva OCR local por página, clasificación híbrida, modo nocturno, revisión en vista completa y exportación de carpetas masivas.
 
-La interfaz usa la identidad visual institucional azul y naranja de PROINSALUD e incluye un módulo de instrucciones de manejo.
+## Catálogo institucional incluido
 
-## Funciones principales
+- 562 clasificaciones TRD/CCD normalizadas.
+- 40 dependencias.
+- 194 series.
+- 529 subseries.
+- 42 archivos fuente dentro de `data/fuentes_trd_proinsalud.zip`.
+- Plantilla con 2.945 entradas de carpetas dentro de `data/plantilla_carpetas_masivas.zip`.
+- Organigrama e instructivo institucional en PDF.
+- Referencia BANTER local orientativa con 104 términos para consulta sin conexión.
 
-- Carga de TRD/CCD en `.xlsx`, `.xlsm`, `.xls`, `.csv`, `.tsv`, `.zip` y `.rar`.
-- Consulta interactiva de la TRD por área, con búsqueda, retención, disposición final y procedimiento.
-- Cuadro de Clasificación Documental filtrable por dependencia y texto.
-- Vista previa y descarga del organigrama institucional incluido, con acceso al organigrama publicado por PROINSALUD.
-- Módulo interactivo de instrucciones de manejo y vista previa del instructivo IAGED-10 incluido.
-- Detección de dependencia, serie, subserie, tipos documentales, retención, disposición final y procedimiento.
-- Extracción de texto desde PDF, Word, Excel, PowerPoint, ODT, correo EML, texto, HTML, XML, JSON, imágenes y archivos ZIP.
-- OCR real de páginas PDF escaneadas e imágenes mediante Tesseract y PyMuPDF.
-- Detección del año documental desde el nombre, encabezado OCR, contenido y metadatos.
-- Prioridad para fecha interna de creación/ZIP y, cuando no existe, la fecha completa más reciente detectada por OCR.
-- Selección de dependencia antes de cargar para limitar y mejorar la clasificación.
-- Botones para continuar cargando lotes al mismo listado o limpiar la selección y comenzar nuevamente.
-- Clasificador local y explicable: combina TF‑IDF de palabras y caracteres con similitud coseno.
+> La referencia BANTER incluida es una semilla local de apoyo; no es un espejo completo del portal oficial y no reemplaza la TRD/CCD aprobada.
+
+## Módulos
+
+### 1. Administración TRD/CCD
+
+Módulo protegido para:
+
+- cargar nuevas TRD o CCD;
+- analizar y previsualizar la información detectada;
+- activar versiones;
+- eliminar versiones sin uso o archivarlas cuando deban conservar trazabilidad;
+- descargar el catálogo normalizado, las fuentes y la plantilla de carpetas.
+
+Contraseña predeterminada: `archivo123`.
+
+En producción se recomienda definir `ADMIN_PASSWORD` como variable de entorno o secreto de Streamlit.
+
+### 2. TRD e instrumentos
+
+- Selección tabla por tabla según la dependencia productora.
+- Visualización del Excel original que alimentó el catálogo activo.
+- Selector de hojas cuando el libro contiene varias pestañas.
+- Descarga del Excel original y de una copia normalizada.
+- Consulta del Cuadro de Clasificación Documental para todas las áreas o una dependencia específica.
+- Descarga del CCD filtrado y del archivo fuente original.
+- Organigrama institucional renderizado en alta resolución y disponible en PDF.
+- Las nuevas versiones cargadas desde el módulo administrativo conservan sus archivos fuente en `runtime/catalog_sources/`.
+
+### 3. Clasificación y revisión
+
+- El cargador permanece oculto hasta seleccionar `Todas las dependencias` o `Una dependencia específica`.
+- Cuando se elige una dependencia, la clasificación se limita exclusivamente a las series y subseries de esa área.
+- Carga individual o por ZIP.
+- Extracción de texto y perfiles `OCR completo`, `OCR inteligente` o texto digital.
+- OCR de todas las páginas hasta el límite configurable, conservando marcadores por página.
+- Detección de año documental.
+- Clasificación híbrida probabilística por título principal, nombre, contenido, consenso entre páginas, tipología, palabras, caracteres y análisis semántico latente.
+- Desambiguación explícita entre términos cercanos del OCR, por ejemplo `préstamo` frente a `prueba`.
+- Edición directa desde la tabla de revisión, limitada a la dependencia seleccionada.
+- Selección encadenada: dependencia → serie → subserie.
+- `OTROS / OTRAS SERIES` y `OTROS / OTRAS SUBSERIES` aparecen primero.
+- BANTER permanece como última alternativa para propuestas sin código oficial.
+- Botones `Guardar cambios`, `Marcar todos`, `Desmarcar todos` y `Aprobar marcados`.
+
+Cuando la coincidencia oficial no es suficiente, el documento queda temporalmente en:
+
+`OTROS / OTRAS SERIES — sin código TRD`
+
+### IA local gratuita para BANTER
+
+El motor `core/banter.py` funciona completamente en el equipo:
+
+- TF-IDF de palabras y bigramas;
+- n-gramas de caracteres para tolerar variaciones ortográficas;
+- LSA/SVD para afinidad semántica;
+- ponderación de coincidencias de series, subseries, alias y tipos documentales;
+- sin API de pago;
+- sin envío de documentos a un proveedor externo.
+
+La búsqueda BANTER está disponible en el editor del módulo 3 y en el módulo 6.
+
+### 4. Documentos aprobados
+
+- Filtros por año, dependencia y nombre.
+- Vista previa de documentos.
+- Consulta de retención y disposición final.
+- Descarga de tabla en Excel, PDF, CSV y JSON.
+- Registro de la fuente de clasificación: TRD PROINSALUD, BANTER orientativo o asignación manual.
+
+### 5. Carpetas masivas
+
+Dos modos de exportación:
+
+1. Plantilla codificada suministrada por PROINSALUD.
+2. Jerarquía por año, dependencia, serie y subserie.
+
+La opción recomendada conserva la estructura:
+
+```text
+CARPETAS_MASIVAS_ACTUALIZADAS/
+└── CÓDIGO - DEPENDENCIA/
+    └── CÓDIGO.SERIE - SERIE/
+        └── CÓDIGO COMPLETO - SUBSERIE/
+            └── TIPO DOCUMENTAL/
+                └── archivo
+```
+
+#### Corrección de carpetas duplicadas
+
+La exportación ahora reutiliza exactamente el nombre existente en la plantilla. Cuando la longitud total de una ruta es elevada, el sistema **no recorta el nombre de la carpeta**: ajusta únicamente el nombre del archivo. Esto evita que aparezcan dos carpetas casi iguales, por ejemplo una completa y otra terminada en `...archiv`.
+
+Las rutas también se deduplican con las reglas de comparación de Windows: sin distinguir mayúsculas/minúsculas y eliminando espacios o puntos finales.
+
+#### Series y subseries apoyadas en BANTER
+
+Las clasificaciones BANTER no reciben códigos inventados. Primero se normalizan acentos, mayúsculas, pluralización y prefijos `SERIE SIN CÓDIGO`. Si la denominación ya existe en la TRD de la dependencia, se reutiliza la carpeta codificada. Solo cuando no existe equivalencia se exporta de forma legible:
+
+```text
+CARPETAS_MASIVAS_ACTUALIZADAS/
+└── DEPENDENCIA/
+    └── SERIE SIN CÓDIGO - Nombre de la serie/
+        └── SUBSERIE SIN CÓDIGO - Nombre de la subserie/
+            └── archivo
+```
+
+El ZIP incluye manifiestos CSV/JSON y una tabla PDF con la fuente de clasificación.
+
+### 6. Catálogo y BANTER
+
+- Búsqueda inteligente en las series y subseries de la TRD activa.
 - Filtro opcional por dependencia.
-- Lista de alternativas con puntaje de similitud y nivel de confianza.
-- Revisión humana con estados `Pendiente`, `Aprobada`, `Corregida` y `Descartada`.
-- Módulo de asignación manual: filtra por dependencia, busca por nombre y muestra sección, subsección, serie y subserie.
-- Aprendizaje incremental: los documentos aprobados o corregidos refuerzan el código correspondiente en búsquedas posteriores.
-- Persistencia en SQLite.
-- Tabla previa y vista previa del documento antes de exportar.
-- Vista previa de PDF renderizada internamente, sin depender del componente opcional `st.pdf`.
-- Exportación de la tabla a Excel, CSV, JSON y PDF imprimible.
-- ZIP organizado por año/dependencia/serie/subserie, con opción de incluir la estructura TRD vacía completa.
+- Consulta BANTER separada como fuente orientativa.
+- Las TRD, el CCD y el organigrama se concentran en el módulo 2 para evitar acciones duplicadas.
+
+
+## Interfaz y modo nocturno
+
+- Interruptor `Modo nocturno` disponible en la barra lateral y en la vista completa de revisión.
+- Paleta clara y nocturna aplicada a paneles, controles, pestañas, formularios y fondos.
+- Navegación con menos elementos visuales y acciones agrupadas por etapa.
+- La vista completa de revisión oculta la barra lateral, el encabezado y el flujo de módulos hasta que se pulse `Volver`.
+- Las columnas de evidencia, predicción, fuente, año u observaciones pueden ocultarse o mostrarse según la tarea.
+- Los botones principales utilizan morado con texto blanco para mantener contraste en modo claro y nocturno.
+- En revisión, seleccione primero una dependencia; la lista de series queda limitada a esa área. Al abrir una fila, la subserie se limita estrictamente a la serie seleccionada.
 
 ## Inicio rápido en Windows
 
-1. Instale [Python 3.11 o superior](https://www.python.org/downloads/).
-2. Descomprima el proyecto.
-3. Haga doble clic en `iniciar_windows.bat`.
-4. El navegador abrirá `http://localhost:8501`.
+1. Instale Python 3.11 o superior.
+2. Descomprima completamente el ZIP.
+3. Abra la carpeta `PROINSALUD_TRD_IA_V9`.
+4. Para leer PDF escaneados, ejecute una vez `instalar_ocr_windows.bat` si Tesseract no está instalado.
+5. Ejecute `iniciar_windows.bat`.
+6. Abra `http://localhost:8501` si el navegador no se abre automáticamente.
 
-En PowerShell también puede ejecutar:
+El iniciador guarda el entorno de Python en `%LOCALAPPDATA%\PROINSALUD_TRD\venv`. Esto evita el error **WinError 206: el nombre del archivo o la extensión es demasiado largo**, que se producía al crear `.venv` dentro de una ruta duplicada y extensa.
 
-```powershell
-py -m venv .venv
-.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-streamlit run app.py
+Si la primera instalación se interrumpe, ejecute `reparar_inicio_windows.bat`. La reparación elimina solamente el entorno de Python y no borra los documentos del aplicativo. Consulte también `SOLUCION_ERROR_INICIO.md`.
+
+
+## Corrección para nombres de archivo largos en Windows
+
+La aplicación conserva el nombre original del documento en la base de datos, pero utiliza internamente un nombre físico más corto y único dentro de `runtime/uploads/`. Esto evita el error:
+
+```text
+FileNotFoundError: [Errno 2] No such file or directory
 ```
 
-## Inicio en Linux o macOS
+que puede aparecer cuando la ruta completa supera el límite clásico de Windows. La carpeta de cargas también se recrea automáticamente si fue eliminada o todavía no existe. No es necesario renombrar manualmente los PDF, Word o Excel antes de cargarlos.
+
+## Linux o macOS
 
 ```bash
 chmod +x iniciar_linux_mac.sh
@@ -67,113 +184,82 @@ streamlit run app.py
 ## Docker
 
 ```bash
-docker build -t clasificador-trd .
-docker run --rm -p 8501:8501 -v "$(pwd)/runtime:/app/runtime" clasificador-trd
+docker build -t proinsalud-documental .
+docker run --rm -p 8501:8501 -v "$(pwd)/runtime:/app/runtime" proinsalud-documental
 ```
 
-## Publicar como aplicación web
+## Seguridad
 
-El proyecto está preparado para GitHub y Streamlit Community Cloud:
+Variables opcionales:
 
-- `requirements.txt`: dependencias Python;
-- `packages.txt`: Tesseract OCR y paquete de idioma español;
-- `.github/workflows/tests.yml`: pruebas automáticas en cada actualización;
-- `DEPLOY_WEB.md`: instrucciones completas para GitHub y publicación web;
-- `GUIA_GITHUB.html`: guía visual que puede abrir con doble clic en Windows;
-- `SECURITY.md`: precauciones para documentos institucionales.
+- `APP_PASSWORD`: protege toda la aplicación.
+- `ADMIN_PASSWORD`: cambia la contraseña del módulo administrativo.
+- `CLASIFICADOR_DATA_DIR`: cambia la ubicación de la base y archivos procesados.
 
-Consulte [DEPLOY_WEB.md](DEPLOY_WEB.md). Puede configurar `APP_PASSWORD` en los secretos de Streamlit para activar la pantalla básica de acceso sin publicar la contraseña en GitHub.
+Los originales quedan en `runtime/uploads/` y la base en `runtime/clasificador.sqlite3`.
 
-Esta aplicación no funciona subiendo únicamente un archivo HTML: OCR, SQLite, clasificación TF-IDF y creación de ZIP necesitan el servidor Python. En GitHub debe cargar todos los archivos del proyecto y desplegar `app.py` con Streamlit.
+Para producción:
 
-La aplicación evita claves visuales duplicadas aunque se cargue varias veces el mismo documento.
-
-## Flujo de uso
-
-1. Abra **Fuentes TRD/CCD** para consultar la TRD por área, el CCD, el organigrama o cargar una nueva versión.
-2. Abra **Instrucciones de manejo** para recorrer el proceso y consultar el instructivo institucional.
-3. Abra **Clasificar archivos**, seleccione la dependencia y configure OCR y detección de año.
-4. Cargue documentos individuales o un ZIP y revise el año, las alternativas y el contenido extraído.
-5. Si necesita decidir directamente, use **Asignación manual**, filtre el área, escriba el nombre y seleccione serie/subserie.
-6. Abra **Revisión humana** para confirmar o corregir tanto el año como el código, y descargar la tabla en PDF o Excel.
-7. Abra **Exportar**, filtre año/dependencia, revise la tabla y la vista previa, pulse **Preparar archivo comprimido** y luego **Descargar ZIP**.
-
-## Estructura del ZIP según IAGED-10
-
-```text
-2025/
-└── 3002.2 - GESTION DOCUMENTAL/
-    └── 3002.2.28 - INFORMES/
-        └── 3002.2.28.63 - Informes de Gestión/
-            └── documento.pdf
-```
-
-Cuando una serie no tiene subserie, el documento se ubica directamente dentro de la carpeta de serie. La opción **Incluir estructura TRD completa** agrega también las carpetas vacías correspondientes a las dependencias y años seleccionados.
-
-## Cómo funciona el modelo
-
-El sistema no usa una API externa ni un modelo generativo. Para cada código crea un documento de entrenamiento con:
-
-- código y dependencia;
-- nombre de la serie y subserie;
-- tipos documentales;
-- procedimiento de retención;
-- ejemplos previamente aprobados o corregidos.
-
-Calcula dos espacios TF‑IDF: palabras y bigramas, más n‑gramas de caracteres. La puntuación final combina ambas similitudes y aplica un refuerzo cuando el nombre o el contenido contiene un código archivístico exacto. El resultado es un **puntaje de similitud**, no una probabilidad ni una decisión jurídica.
-
-## Datos y privacidad
-
-- La aplicación trabaja localmente.
-- La base está en `runtime/clasificador.sqlite3`.
-- Los originales cargados quedan en `runtime/uploads/`.
-- Para borrar el historial de una instalación de pruebas, cierre la aplicación y elimine la carpeta `runtime/`.
-- En producción, cifre el disco, proteja el acceso, defina roles, registre auditoría y haga copias de seguridad.
-
-## OCR
-
-El programa detecta páginas PDF con poco o ningún texto, las convierte temporalmente a imagen con PyMuPDF y ejecuta OCR. El paquete Python `pytesseract` es el conector, pero también debe instalar el programa Tesseract y el idioma español:
-
-- Windows: instale Tesseract y agréguelo al `PATH`.
-- Ubuntu/Debian: `sudo apt install tesseract-ocr tesseract-ocr-spa`.
-- macOS: `brew install tesseract tesseract-lang`.
-
-Si el paquete de idioma español no está disponible, el sistema intenta el idioma predeterminado de Tesseract y muestra una advertencia. Puede limitar el número máximo de páginas OCR desde la interfaz.
-
-## RAR
-
-La lectura de RAR desde la interfaz usa `rarfile` y necesita 7‑Zip, UnRAR o una herramienta compatible instalada. Si no está disponible, descomprima el RAR y cargue los Excel, o conviértalo a ZIP. El catálogo PROINSALUD incluido ya fue procesado y no requiere abrir el RAR.
-
-## Regenerar el catálogo inicial
-
-```bash
-python scripts/build_catalog.py "/ruta/a/TRD PROINSALUD.rar" \
-  --output data/catalogo_proinsalud.json \
-  --name "PROINSALUD"
-```
-
-También puede apuntar a un directorio con múltiples Excel.
+- cifre el disco;
+- limite el acceso por perfiles;
+- realice copias de seguridad;
+- proteja los secretos;
+- registre auditoría;
+- no publique documentos sensibles en servicios públicos sin autorización.
 
 ## Pruebas
 
 ```bash
-python -m unittest discover -s tests
+python -m unittest discover -s tests -v
 ```
 
-## Estructura
+El paquete incluye **38 pruebas automatizadas** para catálogo, clasificación, OCR, revisión, búsqueda BANTER, persistencia, exportación PDF y generación de carpetas masivas, incluidas regresiones específicas para rutas largas y carpetas duplicadas.
+
+## Estructura del proyecto
 
 ```text
-app.py                    interfaz Streamlit
-core/catalog.py           lectura y normalización TRD/CCD
-core/text_extract.py      extracción de documentos
-core/ml_engine.py         índice y clasificación TF-IDF
-core/database.py          persistencia SQLite y aprendizaje
-core/exporter.py          manifiestos y ZIP clasificado
-data/                     catálogo, organigrama e instructivo institucional
-scripts/build_catalog.py  regeneración del catálogo
-tests/                    pruebas automatizadas
+app.py                             interfaz Streamlit
+core/catalog.py                    lectura y normalización TRD/CCD
+core/ml_engine.py                  clasificación híbrida probabilística local
+core/hierarchy.py                  equivalencias TRD/BANTER y deduplicación
+core/banter.py                     consulta semántica BANTER local
+core/database.py                   SQLite, versiones y revisión
+core/text_extract.py               extracción, OCR y año
+core/exporter.py                   tablas y ZIP codificado
+data/catalogo_proinsalud.json      catálogo inicial
+data/banter_agn_referencia.json    referencia orientativa BANTER
+data/fuentes_trd_proinsalud.zip    fuentes institucionales
+data/plantilla_carpetas_masivas.zip plantilla institucional
+tests/                             pruebas automatizadas
 ```
 
-## Criterio archivístico
+## Alcance archivístico
 
-La herramienta asiste la búsqueda y organización. No debe ordenar transferencias, eliminación, selección o conservación sin validación del responsable de gestión documental y sin aplicar la TRD vigente y aprobada de la entidad.
+La aplicación es una herramienta de apoyo. No debe ordenar eliminación, selección, conservación, transferencias o incorporación oficial de nuevas series sin validación del responsable de gestión documental y sin aplicar la TRD vigente de la entidad.
+
+## Actualización V7 — visibilidad y OTROS
+
+La versión V7 aplica alto contraste a todos los botones, selectores, menús y popovers. Los documentos que no tengan una coincidencia válida en la TRD activa se exportan en la serie temporal `OTROS - OTRAS SERIES SIN CÓDIGO TRD`, dentro de la dependencia detectada o en `OTROS - DEPENDENCIA POR DEFINIR` cuando el área tampoco pueda establecerse.
+
+
+## Actualización V8
+Consulte `MEJORAS_CONTRASTE_DESPLEGABLES_SELECCION_V8.md`.
+
+
+## Actualización V8 — contraste y selección masiva
+
+- El editor de tabla conserva una paleta clara de alto contraste aun cuando el aplicativo está en modo nocturno.
+- Los menús desplegables internos muestran fondo claro y texto azul oscuro.
+- Al abrir la revisión se preselecciona una dependencia con documentos visibles, recuperando la edición directa de Serie y Subserie.
+- **Marcar todos** activa todas las casillas de aprobación visibles; **Aprobar marcados** confirma el lote.
+- Las series se limitan a la dependencia seleccionada y, al filtrar una serie, las subseries se limitan a esa serie.
+
+
+## Actualización V9 — TRD por tabla y carga organizada
+
+- Nuevo módulo independiente `TRD e instrumentos`.
+- Visualización y descarga de cada Excel TRD original.
+- CCD filtrable y descargable por área.
+- Organigrama en alta resolución.
+- Persistencia de archivos fuente por versión de catálogo.
+- La carga documental solo aparece después de definir su alcance institucional.
